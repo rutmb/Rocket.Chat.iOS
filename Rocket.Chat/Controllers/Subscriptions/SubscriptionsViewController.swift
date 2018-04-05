@@ -620,7 +620,8 @@ extension SubscriptionsViewController: SubscriptionUserStatusViewProtocol {
         dismissUserMenu()
     }
 
+    //FIX-ME Changed Rocket.Chat
     @IBAction func buttonAddChannelDidTap(sender: Any) {
-        performSegue(withIdentifier: "New Channel", sender: sender)
+        performSegue(withIdentifier: "ChannelSearchChannelViewController", sender: sender)
     }
 }

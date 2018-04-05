@@ -24,23 +24,23 @@ final class AuthViewController: BaseViewController {
 
     var loginServicesToken: NotificationToken?
 
-    @IBOutlet weak var viewFieldsHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var viewFields: UIView! {
+    @IBOutlet weak var viewFieldsHeightConstraint: NSLayoutConstraint? //FIX-ME Changed Rocket.Chat
+    @IBOutlet weak var viewFields: UIView? { //FIX-ME Changed Rocket.Chat
         didSet {
-            viewFields.layer.cornerRadius = 4
-            viewFields.layer.borderColor = UIColor.RCLightGray().cgColor
-            viewFields.layer.borderWidth = 0.5
+            viewFields?.layer.cornerRadius = 4
+            viewFields?.layer.borderColor = UIColor.RCLightGray().cgColor
+            viewFields?.layer.borderWidth = 0.5
         }
     }
 
     var hideViewFields: Bool = false {
         didSet {
             if hideViewFields {
-                viewFields.isHidden = true
-                viewFieldsHeightConstraint.constant = 0
+                viewFields?.isHidden = true
+                viewFieldsHeightConstraint?.constant = 0
             } else {
-                viewFields.isHidden = false
-                viewFieldsHeightConstraint.constant = 100
+                viewFields?.isHidden = false
+                viewFieldsHeightConstraint?.constant = 100
             }
         }
     }
@@ -53,23 +53,20 @@ final class AuthViewController: BaseViewController {
 
     @IBOutlet weak var textFieldUsername: UITextField!
     @IBOutlet weak var textFieldPassword: UITextField!
-    @IBOutlet weak var visibleViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var visibleViewBottomConstraint: NSLayoutConstraint? //FIX-ME Changed Rocket.Chat
 
-    @IBOutlet weak var buttonAuthenticateGoogle: UIButton! {
+    @IBOutlet weak var buttonAuthenticateGoogle: UIButton? { //FIX-ME Changed Rocket.Chat
         didSet {
-            buttonAuthenticateGoogle.layer.cornerRadius = 3
+            buttonAuthenticateGoogle?.layer.cornerRadius = 3
         }
     }
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
-    @IBOutlet var buttonRegister: UIButton!
-    @IBOutlet weak var buttonResetPassword: UIButton!
-    @IBOutlet weak var labelProceedingAgreeing: UILabel!
-    @IBOutlet weak var buttonTermsOfService: UIButton!
-    @IBOutlet weak var labelAnd: UILabel!
-    @IBOutlet weak var buttonPrivacy: UIButton!
-    @IBOutlet weak var authButtonsStackView: UIStackView!
+    @IBOutlet var buttonRegister: UIButton? //FIX-ME Changed Rocket.Chat
+    @IBOutlet weak var buttonResetPassword: UIButton?
+
+    @IBOutlet weak var authButtonsStackView: UIStackView?
     var customAuthButtons = [String: UIButton]()
 
     deinit {
@@ -82,21 +79,12 @@ final class AuthViewController: BaseViewController {
         title = serverURL.host
 
         if let registrationForm = AuthSettingsManager.shared.settings?.registrationForm {
-           buttonRegister.isHidden = registrationForm != .isPublic
+           buttonRegister?.isHidden = registrationForm != .isPublic
         }
 
-        textFieldUsername.placeholder = localized("auth.login.username.placeholder")
-        textFieldPassword.placeholder = localized("auth.login.password.placeholder")
-        buttonRegister.setTitle(localized("auth.login.buttonRegister"), for: .normal)
-        buttonResetPassword.setTitle(localized("auth.login.buttonResetPassword"), for: .normal)
-        labelProceedingAgreeing.text = localized("auth.login.agree_label")
-        buttonTermsOfService.setTitle(localized("auth.login.agree_termsofservice"), for: .normal)
-        labelAnd.text = localized("auth.login.agree_and")
-        buttonPrivacy.setTitle(localized("auth.login.agree_privacypolicy"), for: .normal)
         hideViewFields = !(AuthSettingsManager.settings?.isUsernameEmailAuthenticationEnabled ?? true)
-        buttonResetPassword.isHidden = !(AuthSettingsManager.settings?.isPasswordResetEnabled ?? true)
+        buttonResetPassword?.isHidden = !(AuthSettingsManager.settings?.isPasswordResetEnabled ?? true)
 
-        updateFieldsPlaceholders()
         updateAuthenticationMethods()
     }
 
@@ -119,9 +107,10 @@ final class AuthViewController: BaseViewController {
             object: nil
         )
 
-        if !connecting {
+        //FIX-ME Changed Rocket.Chat
+        /*if !connecting {
             textFieldUsername.becomeFirstResponder()
-        }
+        }*/
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -147,32 +136,20 @@ final class AuthViewController: BaseViewController {
     // MARK: Keyboard Handlers
     override func keyboardWillShow(_ notification: Notification) {
         if let keyboardSize = ((notification as NSNotification).userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            visibleViewBottomConstraint.constant = keyboardSize.height
+            visibleViewBottomConstraint?.constant = keyboardSize.height
         }
     }
 
     override func keyboardWillHide(_ notification: Notification) {
-        visibleViewBottomConstraint.constant = 0
+        visibleViewBottomConstraint?.constant = 0
     }
 
     // MARK: Authentication methods
 
-    fileprivate func updateFieldsPlaceholders() {
-        guard let settings = self.serverPublicSettings else { return }
-
-        if !(settings.emailOrUsernameFieldPlaceholder?.isEmpty ?? true) {
-            self.textFieldUsername.placeholder = settings.emailOrUsernameFieldPlaceholder
-        }
-
-        if !(settings.passwordFieldPlaceholder?.isEmpty ?? true) {
-            self.textFieldPassword.placeholder = settings.passwordFieldPlaceholder
-        }
-    }
-
     fileprivate func updateAuthenticationMethods() {
         guard let settings = self.serverPublicSettings else { return }
 
-        self.buttonAuthenticateGoogle.isHidden = !settings.isGoogleAuthenticationEnabled
+        self.buttonAuthenticateGoogle?.isHidden = !settings.isGoogleAuthenticationEnabled
 
         if settings.isFacebookAuthenticationEnabled {
             addOAuthButton(for: .facebook)

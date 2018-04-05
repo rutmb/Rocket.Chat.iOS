@@ -30,7 +30,9 @@ class SubscriptionsPageViewController: UIPageViewController {
 
         delegate = self
         dataSource = self
-        view.backgroundColor = .RCBackgroundColor()
+        
+        //FIX-ME Changed
+        view.backgroundColor = .white
 
         // Setup page control
         let pageControl = UIPageControl()
@@ -57,6 +59,17 @@ class SubscriptionsPageViewController: UIPageViewController {
         self.serversController = serversController
 
         setViewControllers([subscriptionsController], direction: .reverse, animated: false, completion: nil)
+    }
+    
+    //FIX-ME Changed code
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isHidden = false
     }
 
     override func viewDidLayoutSubviews() {

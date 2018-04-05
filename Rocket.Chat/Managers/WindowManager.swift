@@ -11,6 +11,7 @@ import UIKit
 enum Storyboard {
     case auth(serverUrl: String, credentials: DeepLinkCredentials?)
     case chat
+    case chatMain
     case preferences
 
     var name: String {
@@ -19,6 +20,8 @@ enum Storyboard {
             return "Auth"
         case .chat:
             return "Chat"
+	case .chatMain:  //FIX-ME Changed Rocket.Chat
+            return "ChatMain"
         case .preferences:
             return "Preferences"
         }

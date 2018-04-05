@@ -101,8 +101,20 @@ final class ConnectServerViewController: BaseViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let controller = segue.destination as? AuthViewController, segue.identifier == "Auth" {
-            controller.serverURL = url
+        
+        //FIX-ME Changed Rocket.Chat
+        /*if let controller = segue.destination as? AuthViewController, segue.identifier == "Auth" {
+            controller.serverURL = url?.socketURL()
+            controller.serverPublicSettings = self.serverPublicSettings
+
+            if let credentials = deepLinkCredentials {
+                _ = controller.view
+                controller.authenticateWithDeepLinkCredentials(credentials)
+            }
+        }*/
+        
+        if let controller = (segue.destination as? UINavigationController)?.topViewController as? LoginViewController, segue.identifier == "Login" {
+            controller.serverURL = url?.socketURL()
             controller.serverPublicSettings = self.serverPublicSettings
 
             if let credentials = deepLinkCredentials {
@@ -169,8 +181,14 @@ final class ConnectServerViewController: BaseViewController {
             AuthSettingsManager.updatePublicSettings(nil) { (settings) in
                 self?.serverPublicSettings = settings
 
-                if connected {
+//FIX-ME Changed Rocket.Chat
+                /*if connected {
                     self?.performSegue(withIdentifier: "Auth", sender: nil)
+                }*/
+                
+                
+                if connected {
+                    self?.performSegue(withIdentifier: "Login", sender: nil)
                 }
 
                 self?.stopConnecting()

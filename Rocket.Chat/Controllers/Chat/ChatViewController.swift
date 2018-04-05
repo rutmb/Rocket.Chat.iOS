@@ -913,7 +913,8 @@ final class ChatViewController: SLKTextViewController {
     // MARK: IBAction
 
     @objc func chatTitleViewDidPressed(_ sender: AnyObject) {
-        performSegue(withIdentifier: "Channel Info", sender: sender)
+        // FIX-ME Changed
+        //performSegue(withIdentifier: "Channel Info", sender: sender)
     }
 
     @IBAction func buttonScrollToBottomPressed(_ sender: UIButton) {

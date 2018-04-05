@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SideMenuController
+//import SideMenuController
 
 class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
     let infoRequestHandler = InfoRequestHandler()
