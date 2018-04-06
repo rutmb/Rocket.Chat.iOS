@@ -12,7 +12,7 @@ import SafariServices
 import OnePasswordExtension
 import RealmSwift
 
-final class AuthViewController: BaseViewController {
+class AuthViewController: BaseViewController {
 
     internal var connecting = false
 
@@ -228,7 +228,7 @@ final class AuthViewController: BaseViewController {
         activityIndicator.startAnimating()
         textFieldUsername.resignFirstResponder()
         textFieldPassword.resignFirstResponder()
-        buttonAuthenticateGoogle.isEnabled = false
+        buttonAuthenticateGoogle?.isEnabled = false
         customAuthButtons.forEach { _, button in button.isEnabled = false }
         navigationItem.hidesBackButton = true
     }
@@ -238,7 +238,7 @@ final class AuthViewController: BaseViewController {
             self.textFieldUsername.alpha = 1
             self.textFieldPassword.alpha = 1
             self.activityIndicator.stopAnimating()
-            self.buttonAuthenticateGoogle.isEnabled = true
+            self.buttonAuthenticateGoogle?.isEnabled = true
             self.customAuthButtons.forEach { _, button in button.isEnabled = true }
             self.navigationItem.hidesBackButton = false
         })
@@ -499,6 +499,11 @@ extension AuthViewController {
         button.setTitleColor(UIColor(hex: loginService.buttonLabelColor), for: .normal)
         button.backgroundColor = UIColor(hex: loginService.buttonColor)
 
+      
+      //FIX-ME Changed Rocket.Chat
+      
+      guard let authButtonsStackView = authButtonsStackView else {return}
+      
         if !authButtonsStackView.subviews.contains(button) {
             authButtonsStackView.addArrangedSubview(button)
             button.addTarget(self, action: #selector(loginServiceButtonDidPress(_:)), for: .touchUpInside)
@@ -536,7 +541,7 @@ extension AuthViewController {
                     return
                 }
 
-                authButtonsStackView.removeArrangedSubview(button)
+                authButtonsStackView?.removeArrangedSubview(button)
                 customAuthButtons.removeValue(forKey: identifier)
             }
         default: break

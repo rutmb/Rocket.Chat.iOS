@@ -12,7 +12,7 @@ import UserNotifications
 import GoogleSignIn
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegateRocketChat: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
