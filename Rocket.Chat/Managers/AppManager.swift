@@ -97,7 +97,13 @@ extension AppManager {
                         BugTrackingCoordinator.identifyCrashReports(withUser: currentUser)
                     }
 
-                    WindowManager.open(.chat)
+//                    WindowManager.open(.chat)
+                  ModuleManager.shared.rootViewController { rootViewController in
+                    guard let window = UIApplication.shared.keyWindow, let rootViewController = rootViewController else {return}
+                    let transition = CATransition()
+                    transition.type = kCATransitionFade
+                    window.set(rootViewController: rootViewController, withTransition: transition)
+                  }
                 } else {
                     WindowManager.open(.auth(serverUrl: "", credentials: nil))
                 }
@@ -153,10 +159,11 @@ extension AppManager {
         }
 
         // If not, fetch it
+        let currentRealm = Realm.current
         let request = SubscriptionInfoRequest(roomName: name)
         API.current()?.fetch(request, succeeded: { result in
             DispatchQueue.main.async {
-                Realm.executeOnMainThread({ realm in
+                Realm.executeOnMainThread(realm: currentRealm, { realm in
                     guard let values = result.channel else { return }
 
                     let subscription = Subscription.getOrCreate(realm: realm, values: values, updates: { object in

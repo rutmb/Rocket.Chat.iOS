@@ -138,12 +138,14 @@ class ChatViewController: SLKTextViewController {
     // MARK: View Life Cycle
 
     static var shared: ChatViewController? {
+      //Edit here
         if let main = UIApplication.shared.delegate?.window??.rootViewController as? MainChatViewController {
             if let nav = main.centerViewController as? UINavigationController {
                 return nav.viewControllers.first as? ChatViewController
             }
+        } else if let chat = ModuleManager.shared.viewController(by: "ChatMainViewController") as? ChatViewController {
+            return chat
         }
-
         return nil
     }
 
@@ -509,6 +511,12 @@ class ChatViewController: SLKTextViewController {
             return
         }
 
+      if text == Configuration.Zoom.start {
+//        ZoomService.sharedInstance.start(username: "Host", userId: "user_id", token: "token")
+        ZoomService.sharedInstance.join(userName: "Host")
+        view.endEditing(true)
+      }
+      
         guard let client = API.current()?.client(MessagesClient.self) else { return Alert.defaultError.present() }
         client.sendMessage(text: text, subscription: subscription)
     }
@@ -678,6 +686,17 @@ class ChatViewController: SLKTextViewController {
                 self.messages.append(contentsOf: newMessages)
                 self.appendMessages(messages: newMessages, completion: {
                     self.markAsRead()
+                  
+                  let count = newMessages.filter { message in
+                    guard let createdDate = message.createdAt else {
+                      return false
+                    }
+                    return (message.text.lowercased() == Configuration.Zoom.start) && (createdDate.secondsInBetweenDate(Date()) < Double(5))
+                    }.count
+                  if count > 0  {
+                    ZoomService.sharedInstance.join(userName: "Guest")
+                    self.view.endEditing(true)
+                  }
                 })
             }
 

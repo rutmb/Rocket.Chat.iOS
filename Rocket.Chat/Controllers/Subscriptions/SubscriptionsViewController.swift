@@ -304,7 +304,7 @@ extension SubscriptionsViewController {
     func subscribeModelChanges() {
         guard !assigned else { return }
         guard let auth = AuthManager.isAuthenticated() else { return }
-        guard let realm = Realm.shared else { return }
+        guard let realm = Realm.current else { return }
 
         assigned = true
 
@@ -489,9 +489,20 @@ extension SubscriptionsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let subscription = subscription(for: indexPath) else { return }
 
-        let controller = ChatViewController.shared
-        controller?.closeSidebarAfterSubscriptionUpdate = true
-        controller?.subscription = subscription
+      //Edited here
+      
+      guard let controller = ChatViewController.shared else {return}
+        controller.closeSidebarAfterSubscriptionUpdate = true
+        controller.subscription = subscription
+      
+      if UIApplication.shared.keyWindow?.rootViewController?.traitCollection.horizontalSizeClass == .regular {
+        let navVC = UINavigationController(rootViewController: controller)
+        navVC.navigationBar.isTranslucent = false
+        ModuleManager.shared.show(viewController: navVC)
+      } else {
+        ModuleManager.shared.show(viewController: controller)
+      }
+      
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

@@ -30,10 +30,10 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
         SideMenuController.preferences.drawing.sidePanelPosition = .underCenterPanelLeft
 
         if UIDevice.current.userInterfaceIdiom == .pad {
-            SideMenuController.preferences.drawing.sidePanelWidth = 320
+            SideMenuController.preferences.drawing.sidePanelWidth = 250
         } else {
             SideMenuController.preferences.drawing.sidePanelWidth = UIScreen.main.bounds.width -
-                30
+                100
         }
 
         SideMenuController.preferences.drawing.centerPanelShadow = true
