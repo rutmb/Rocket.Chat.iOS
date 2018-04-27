@@ -46,11 +46,11 @@ class SubscriptionsPageViewController: UIPageViewController {
         self.pageControl = pageControl
 
         // Setup ViewControllers
-        let storyboard = UIStoryboard(name: "Subscriptions", bundle: Bundle.main)
+        let storyboard = UIStoryboard(name: "SubscriptionsMain", bundle: Bundle.main)
 
         guard
-            let subscriptionsController = storyboard.instantiateViewController(withIdentifier: "Subscriptions") as? SubscriptionsViewController,
-            let serversController = storyboard.instantiateViewController(withIdentifier: "Servers") as? ServersViewController
+            let subscriptionsController = storyboard.instantiateViewController(withIdentifier: "SubscriptionsViewController") as? SubscriptionsViewController,
+            let serversController = storyboard.instantiateViewController(withIdentifier: "ServersViewController") as? ServersViewController
         else {
             return assert(false, "controllers won't load")
         }

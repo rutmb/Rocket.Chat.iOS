@@ -9,12 +9,11 @@
 import UIKit
 import RealmSwift
 import UserNotifications
-import GoogleSignIn
 
-@UIApplicationMain
 class AppDelegateRocketChat: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var notificationWindow: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         Launcher().prepareToLaunch(with: launchOptions)
@@ -36,7 +35,16 @@ class AppDelegateRocketChat: UIResponder, UIApplicationDelegate {
             WindowManager.open(.auth(serverUrl: "", credentials: nil))
         }
 
+        initNotificationWindow()
+
         return true
+    }
+
+    func initNotificationWindow() {
+        notificationWindow = TransparentToTouchesWindow(frame: UIScreen.main.bounds)
+        notificationWindow?.rootViewController = NotificationViewController.shared
+        notificationWindow?.windowLevel = UIWindowLevelAlert
+        notificationWindow?.makeKeyAndVisible()
     }
 
     // MARK: AppDelegate LifeCycle
@@ -56,22 +64,26 @@ class AppDelegateRocketChat: UIResponder, UIApplicationDelegate {
         }
     }
 
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        if let url = userActivity.webpageURL, AppManager.handleDeepLink(url) != nil {
+            return true
+        }
+
+        return true
+    }
+
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
         if AppManager.handleDeepLink(url) != nil {
             return true
         }
 
-        return GIDSignIn.sharedInstance().handle(
-            url,
-            sourceApplication: options[.sourceApplication] as? String,
-            annotation: options[.annotation]
-        )
+        return false
     }
 
     // MARK: Remote Notification
 
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        UserDefaults.standard.set(deviceToken.hexString, forKey: PushManager.kDeviceTokenKey)
+        UserDefaults.group.set(deviceToken.hexString, forKey: PushManager.kDeviceTokenKey)
     }
 
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
