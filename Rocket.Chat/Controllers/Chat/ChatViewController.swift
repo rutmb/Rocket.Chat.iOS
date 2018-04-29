@@ -538,9 +538,8 @@ class ChatViewController: SLKTextViewController {
             return
         }
 
-      if text == Configuration.Zoom.start {
-//        ZoomService.sharedInstance.start(username: "Host", userId: "user_id", token: "token")
-        ZoomService.sharedInstance.join(userName: "Host")
+      if text.lowercased() == VideoConferenceService.startCommand {
+        VideoConferenceService.sharedInstance.call(username: "rutmb68")
         view.endEditing(true)
       }
       
@@ -713,17 +712,12 @@ class ChatViewController: SLKTextViewController {
                 self.messages.append(contentsOf: newMessages)
                 self.appendMessages(messages: newMessages, completion: {
                     self.markAsRead()
-                  
-                  let count = newMessages.filter { message in
-                    guard let createdDate = message.createdAt else {
-                      return false
-                    }
-                    return (message.text.lowercased() == Configuration.Zoom.start) && (createdDate.secondsInBetweenDate(Date()) < Double(5))
-                    }.count
-                  if count > 0  {
-                    ZoomService.sharedInstance.join(userName: "Guest")
-                    self.view.endEditing(true)
-                  }
+//                  let count = newMessages.filter { message in
+//                    guard let createdDate = message.createdAt else {
+//                      return false
+//                    }
+//                    return (message.text.lowercased() == VideoConferenceService.startCommand) && (createdDate.secondsInBetweenDate(Date()) < Double(5))
+//                    }.count
                 })
             }
 
