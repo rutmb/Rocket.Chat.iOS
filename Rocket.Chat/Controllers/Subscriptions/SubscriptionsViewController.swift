@@ -262,6 +262,11 @@ extension SubscriptionsViewController {
         } else {
             ChatViewController.shared?.subscription = .initialSubscription()
         }
+      
+      //FIX-ME edited here
+      if groupSubscriptions?.isEmpty == true {
+        searchBy()
+      }
 
         // If side panel is visible, reload the data
         if MainChatViewController.shared?.sidePanelVisible ?? false {

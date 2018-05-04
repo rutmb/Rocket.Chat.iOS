@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -39,7 +40,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sh2-nE-Vfw" userLabel="Visible View">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EfD-9d-zSd">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoMain" translatesAutoresizingMaskIntoConstraints="NO" id="xuy-47-Znn">
+                                        <rect key="frame" x="87" y="295" width="200" height="77"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.97569590809999995" green="0.020119411869999999" blue="0.22292324899999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="xuy-47-Znn" firstAttribute="centerY" secondItem="EfD-9d-zSd" secondAttribute="centerY" id="8gg-K8-zQw"/>
+                                    <constraint firstItem="xuy-47-Znn" firstAttribute="centerX" secondItem="EfD-9d-zSd" secondAttribute="centerX" id="SzU-Zb-PVA"/>
+                                    <constraint firstItem="xuy-47-Znn" firstAttribute="centerY" secondItem="EfD-9d-zSd" secondAttribute="centerY" id="hVM-fX-X3z"/>
+                                    <constraint firstItem="xuy-47-Znn" firstAttribute="centerX" secondItem="EfD-9d-zSd" secondAttribute="centerX" id="oUq-8X-j06"/>
+                                </constraints>
+                                <viewLayoutGuide key="safeArea" id="gyu-7d-N4M"/>
+                            </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sh2-nE-Vfw" userLabel="Visible View">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NqF-Ks-juL" userLabel="Content">
@@ -132,9 +149,13 @@
                         </subviews>
                         <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="EfD-9d-zSd" firstAttribute="top" secondItem="hnM-NP-iCl" secondAttribute="top" id="5Cd-VL-TXX"/>
                             <constraint firstItem="sh2-nE-Vfw" firstAttribute="leading" secondItem="hnM-NP-iCl" secondAttribute="leading" id="BIh-zx-ARj"/>
+                            <constraint firstItem="EfD-9d-zSd" firstAttribute="leading" secondItem="hnM-NP-iCl" secondAttribute="leading" id="P1s-Bc-2eW"/>
                             <constraint firstItem="sh2-nE-Vfw" firstAttribute="top" secondItem="yxx-YJ-SEM" secondAttribute="bottom" id="T4J-UO-23N"/>
                             <constraint firstAttribute="trailing" secondItem="sh2-nE-Vfw" secondAttribute="trailing" id="XxY-yi-nl9"/>
+                            <constraint firstItem="4sW-vJ-FiJ" firstAttribute="top" secondItem="EfD-9d-zSd" secondAttribute="bottom" id="Z2f-X1-msY"/>
+                            <constraint firstAttribute="trailing" secondItem="EfD-9d-zSd" secondAttribute="trailing" id="gWe-bT-3Ju"/>
                             <constraint firstItem="sh2-nE-Vfw" firstAttribute="top" secondItem="hnM-NP-iCl" secondAttribute="top" id="xug-VO-fsl"/>
                             <constraint firstItem="4sW-vJ-FiJ" firstAttribute="top" secondItem="sh2-nE-Vfw" secondAttribute="bottom" id="zwG-Q5-5tg"/>
                         </constraints>
