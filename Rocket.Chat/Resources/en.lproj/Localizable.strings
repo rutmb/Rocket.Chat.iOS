@@ -293,3 +293,27 @@
 "myaccount.settings.profile.new_password.password_required.title" = "Enter your password";
 "myaccount.settings.profile.new_password.password_required.message" = "Your current password is required when setting a new password.";
 "myaccount.settings.profile.new_password.password_required.placeholder" = "Password";
+
+// Settings Profile Vitim
+"profile.settings.profile.use_name_for_chat.title" = "Use name for Chat";
+"profile.settings.profile.post.placeholder" = "Post";
+"profile.settings.profile.phone.placeholder" = "Phone";
+"profile.settings.profile.country.title" = "Country";
+"profile.settings.profile.description.placeholder" = "Description";
+
+// Settings Notifications Vitim
+"profile.settings.notifications.notificationsForTitle" = "Send me notifications for";
+"profile.settings.notifications.notificationsEmailTitle" = "Email Notifications";
+"profile.settings.notifications.notificationsAllTitle" = "All new messages";
+"profile.settings.notifications.notificationsOnlyDirectTitle" = "Only Direct Messages & Highlight Words";
+"profile.settings.notifications.notificationsNothingTitle" = "Nothing";
+"profile.settings.notifications.notificationsSoundTitle" = "Sound";
+"profile.settings.notifications.notificationsEmailSendOfflineTitle" = "Send me notifications when I offline";
+"profile.settings.notifications.notificationsEmailSendEventTitle" = "Send me event notifications";
+"profile.settings.notifications.notificationsEmailSendNewsTitle" = "Send me emails with news and tips";
+
+// Settings Other Vitim
+"profile.settings.other.timezoneTitle" = "Timezone";
+"profile.settings.other.currentPasswordPlaceholder" = "Current password";
+"profile.settings.other.newPasswordRulesTitle" = "The password must contain at least 8 characters. You can use letters, numbers and symbols from the list: `! @ # $% ^ & * () _ - + = [] {}; : '|,. <> \ /?";
+"profile.settings.other.deactiveAccountTitle" = "If you no longer need your account on the Vitim, you can deactivate your account";
